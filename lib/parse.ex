@@ -57,7 +57,7 @@ defmodule Parse do
       :error ->
         case Float.parse(token) do
           {value, ""} -> value
-          :error -> token
+          :error -> String.to_atom(token)
         end
     end
   end
