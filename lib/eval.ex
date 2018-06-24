@@ -23,16 +23,22 @@ defmodule Eval do
       if length(exp) <= 1 do
         hd(exp)
       end
-    { nil , Env.put(symbol, eval(exp, env), env)}
+      {nil, Env.put(symbol,eval(exp, env) |> elem(0), env)}
   end
 
   def eval(x, env) when is_list(x) do
-    proc = elem(eval(hd(x), env),0)
+    proc = eval(hd(x), env) |> elem(0)
     [_ | exp] = x
-    #IO.inspect proc
-    args = Enum.map(exp, fn arg -> eval(arg, env) end) |> Enum.into([], fn x -> elem(x,0) end)
-    #IO.inspect args
-    {proc.(args),nil}
-    #apply(proc, args)
+    args = compute_args(exp, Env.new_env(env)) |> Enum.into([], fn x -> elem(x, 0) end)
+    {proc.(args), env}
+  end
+
+  def compute_args([], env) do
+    []
+  end
+
+  def compute_args([h | t], env) do
+    {result, env} = eval(h, env)
+    [{result, env} | compute_args(t, env)]
   end
 end
