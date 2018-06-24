@@ -26,6 +26,17 @@ defmodule Eval do
       {nil, Env.put(symbol,eval(exp, env) |> elem(0), env)}
   end
 
+  def eval([:set!, symbol | exp], env) do
+    exp =
+      if length(exp) <= 1 do
+        hd(exp)
+      end
+     case Env.get(symbol,env) do
+         nil -> raise "#{symbol} not defined."
+         _ -> {nil, Env.put(symbol, eval(exp, env) |> elem(0),env) }
+     end
+  end
+
   def eval(x, env) when is_list(x) do
     proc = eval(hd(x), env) |> elem(0)
     [_ | exp] = x
