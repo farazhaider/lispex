@@ -1,6 +1,9 @@
 defmodule Eval do
-  def eval(x) do
-    eval(x, Env.new_env())
+  def eval(x, env, _) do
+    case env do
+        nil -> eval(x, Env.new_env())
+        _ -> eval(x, env)
+    end
   end
 
   def eval(x, env) when is_atom(x) do
@@ -21,7 +24,7 @@ defmodule Eval do
 
   def eval([:define, symbol | exp], env) do
     exp = sanitize(exp)
-      {nil, Env.put(symbol,eval(exp, env) |> elem(0), env)}
+    {nil, Env.put(symbol,eval(exp, env) |> elem(0), env)}
   end
 
   def eval([:set!, symbol | exp], env) do
@@ -41,7 +44,7 @@ defmodule Eval do
     {proc.(args), parent_env}
   end
 
-  def compute_args([], env) do
+  def compute_args([], _) do
     []
   end
 
@@ -56,4 +59,5 @@ defmodule Eval do
     else x
     end
   end
+
 end
