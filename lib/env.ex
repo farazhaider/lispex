@@ -1,4 +1,26 @@
 defmodule Env do
+
+  @moduledoc """
+  This is the Environment module. Used by the `Eval` module to evaluate the scheme code.
+  Contains the definition for Scheme constructs in a `Map` .
+  """
+
+  @doc """
+
+  Creates a new environment map.
+
+  Returns `Map`
+
+  ## Parameters 
+
+    - **outer** : A `Map` which represents the outer Environment. Default value `nil` for this optional parameter.
+  
+  ## Example
+
+      iex> Env.new_env()
+      %{}
+  
+  """
   def new_env(outer \\ nil) do
     env = %{
         :+ => &(List.first(&1) + List.last(&1)),
@@ -57,14 +79,48 @@ defmodule Env do
     end
   end
 
+  @doc """
+
+  Inserts a key value pair in the current environment and returns it.
+
+  Returns `Map`
+
+  ## Parameters
+
+    - **k** : Key 
+    - **v** : Value
+    - **env** : A `Map` which represents the current environment.
+    
+  
+  ## Example
+    
+      iex> Env.put(:a, 5, %{ })
+      %{:a : 5}
+  
+  """
   def put(k, v, env) do
     Map.put(env, k, v)
   end
 
-  def get(x, env) do
-    case [Map.get(env, x),Map.get(env,:outer)] do
+  @doc """
+
+  Fetches the value for the given key from the supplied environment
+
+  ## Parameters
+     
+     **k** : Key
+     **env** : A `Map` which represents the current environment.
+  
+  ## Example
+     
+      iex> Env.get(:a, env)
+      5
+  
+  """
+  def get(k, env) do
+    case [Map.get(env, k),Map.get(env,:outer)] do
         [nil,nil] -> nil
-        [nil,outer_env] -> get(x,outer_env)
+        [nil,outer_env] -> get(k,outer_env)
         [val,_] -> val 
     end
   end
