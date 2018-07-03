@@ -1,4 +1,13 @@
 defmodule Eval do
+  @moduledoc """
+  Eval module for Lispex. Exposes one public function `eval/3` for the evaluation of AST.
+  """
+
+  @doc """
+
+  Evaluates the AST recursively based on the constructs.
+  
+  """
   def eval(x, env, _) do
     case env do
         nil -> eval(x, Env.new_env())
@@ -6,15 +15,15 @@ defmodule Eval do
     end
   end
 
-  def eval(x, env) when is_atom(x) do
+  defp eval(x, env) when is_atom(x) do
     {Env.get(x, env), env}
   end
 
-  def eval(x, env) when is_number(x) do
+  defp eval(x, env) when is_number(x) do
     {x, env}
   end
 
-  def eval([:if, test, conseq | alt], env) do
+  defp eval([:if, test, conseq | alt], env) do
     alt = sanitize(alt)
     case eval(test, env) do
       {true,_} -> eval(conseq, env)
@@ -22,12 +31,12 @@ defmodule Eval do
     end
   end
 
-  def eval([:define, symbol | exp], env) do
+  defp eval([:define, symbol | exp], env) do
     exp = sanitize(exp)
     {nil, Env.put(symbol,eval(exp, env) |> elem(0), env)}
   end
 
-  def eval([:set!, symbol | exp], env) do
+  defp eval([:set!, symbol | exp], env) do
     exp = sanitize(exp)
      case Env.get(symbol,env) do
          nil -> raise "#{symbol} not defined."
@@ -35,7 +44,7 @@ defmodule Eval do
      end
   end
 
-  def eval(x, env) when is_list(x) do
+  defp eval(x, env) when is_list(x) do
     proc = eval(hd(x), env) |> elem(0)
     [_ | exp] = x
     parent_env  = env
@@ -44,16 +53,16 @@ defmodule Eval do
     {proc.(args), parent_env}
   end
 
-  def compute_args([], _) do
+  defp compute_args([], _) do
     []
   end
 
-  def compute_args([h | t], env) do
+  defp compute_args([h | t], env) do
     {result, env} = eval(h, env)
     [{result, env} | compute_args(t, env)]
   end
 
-  def sanitize(x) do
+  defp sanitize(x) do
     if length(x) <= 1 do
         hd(x)
     else x
