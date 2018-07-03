@@ -8,7 +8,7 @@
     <title>Eval – Lispex v0.1.0</title>
     <link rel="stylesheet" href="dist/app-480ffdc169.css" />
     
-    <script src="dist/sidebar_items-cae91d0343.js"></script>
+    <script src="dist/sidebar_items-a6a2d39ce9.js"></script>
     
     
     
@@ -80,6 +80,11 @@
       </h1>
 
       
+        <section id="moduledoc">
+          <p>Eval module for Lispex. Exposes one public function <a href="#eval/3"><code class="inline">eval/3</code></a> for the evaluation of AST.</p>
+
+        </section>
+      
 
       
         <section id="summary" class="details-list">
@@ -99,26 +104,11 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#compute_args/2">compute_args(list, env)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#eval/2">eval(x, env)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#eval/3">eval(x, env, _)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Evaluates the AST recursively based on the constructs</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#sanitize/1">sanitize(x)</a>
-  </div>
   
 </div>
 
@@ -141,51 +131,7 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="compute_args/2">
-  
-  
-  <div class="detail-header">
-    <a href="#compute_args/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">compute_args(list, env)</span>
-    
-      <a href="https://github.com/farazhaider/lispex/blob/master/lib/eval.ex#L51" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="eval/2">
-  
-  
-  <div class="detail-header">
-    <a href="#eval/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">eval(x, env)</span>
-    
-      <a href="https://github.com/farazhaider/lispex/blob/master/lib/eval.ex#L38" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="eval/3">
+          <div class="detail" id="eval/3">
   
   
   <div class="detail-header">
@@ -195,7 +141,7 @@
     </a>
     <span class="signature">eval(x, env, _)</span>
     
-      <a href="https://github.com/farazhaider/lispex/blob/master/lib/eval.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/farazhaider/lispex/blob/master/lib/eval.ex#L11" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -204,29 +150,8 @@
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="sanitize/1">
-  
-  
-  <div class="detail-header">
-    <a href="#sanitize/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">sanitize(x)</span>
-    
-      <a href="https://github.com/farazhaider/lispex/blob/master/lib/eval.ex#L56" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
+    <p>Evaluates the AST recursively based on the constructs.</p>
+
   </section>
 </div>
 

@@ -4,7 +4,7 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-cae91d0343.js
+dist/sidebar_items-a6a2d39ce9.js
 api-reference.html
 readme.html
 search.html
@@ -13,5 +13,4 @@ Env.html
 Eval.html
 Lispex.html
 Parse.html
-Test.html
 index.html
